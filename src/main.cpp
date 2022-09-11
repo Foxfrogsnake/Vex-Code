@@ -28,17 +28,21 @@
 #include "controls.h"
 #include "odometry.h"
 #include "tools.h"
+#include "pid.h"
 using namespace vex;
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   double sR = 0, sL = 0, sB = 0;
-  Control con({&FR, &FL}, {&R, &L, &B}, &Controller1);
+  Control con({&FR, &FL, &BR, &BL}, {&R, &L, &B}, &Controller1);
   Odometry odo({&R, &L, &B}, &Controller1, {sR, sL, sB});
+  PIDcontroller wheelPID;
+  initializePID(wheelPID, FR, FL, 0, 0, 0, 0);
   while(true){
     con.control();
     odo.display();
+    PID(wheelPID, 0);
   }
 }
 

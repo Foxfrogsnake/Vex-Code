@@ -7,7 +7,7 @@ using namespace vex;
 class Odometry{
   double sR, sL, sB, curO = 0, prevO = 0;
   double enPrev[3] = {0,0,0}, abPos[2] = {0,0};
-  vex::rotation* r,*l,*b;
+  vex::rotation *r,*l,*b;
   vex::controller *control;
   bool screenState = true, buttonAState = false;
   //constructor
@@ -59,6 +59,7 @@ class Odometry{
         curO);
       }
     }
+
 
   void update(){
     vex::rotation en[3] = {*l, *r, *b};

@@ -13,3 +13,4 @@ vector<double> convertPolar(double x, double y)
 vector<double> convertCartesian(double r, double ang){
   return {cos(ang) * r, sin(ang) * r};
 }
+

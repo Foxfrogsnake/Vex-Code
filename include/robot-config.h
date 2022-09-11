@@ -5,6 +5,8 @@ extern brain Brain;
 // VEXcode devices
 extern motor FR;
 extern motor FL;
+extern motor BR;
+extern motor BL;
 extern rotation R;
 extern rotation L;
 extern rotation B;
