@@ -8,10 +8,12 @@ using code = vision::code;
 brain  Brain;
 
 // VEXcode device constructors
-motor FR = motor(PORT2, ratio18_1, false);
+motor FR = motor(PORT2, ratio18_1, true);
 motor FL = motor(PORT1, ratio18_1, false);
-rotation R = rotation(PORT20, false);
-rotation L = rotation(PORT19, false);
+motor BR = motor(PORT3, ratio18_1, false);
+motor BL = motor(PORT4, ratio18_1, false);
+rotation R = rotation(PORT20, true);
+rotation L = rotation(PORT19, true);
 rotation B = rotation(PORT18, false);
 controller Controller1 = controller(primary);
 

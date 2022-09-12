@@ -1,6 +1,7 @@
 #include "vex.h"
 #include "string.h"
 #include <cmath>
+#include "odometry.h"
 
 typedef struct {
   float sensor;
@@ -65,15 +66,19 @@ task usercontrol()
   }
 }
 
-void PID(PIDcontroller &controller, float target) {
-  bool goal = 0;
-  float dist;
-  while (goal) {
-    dist = update(controller, target, 10);
-    FR.spin(fwd, dist, rpm);
-    FL.spin(fwd, dist, rpm);
-    if (dist < 1) {
-      goal = 1;
-    }
-  }
+void PID(Odometry odometry, PIDcontroller &controller, float abPos[2]) {
+  // bool goal = 0;
+  // float dist;
+  // float dist2[1];
+  // for (int i = 0; i < 2; i++) {
+  //   dist2[i] = odometry.abPos[i] - abPos[i];
+  // }
+  // while (goal) {
+  //   dist = update(controller, ;
+  //   FR.spin(fwd, dist, rpm);
+  //   FL.spin(fwd, dist, rpm);
+  //   if (dist < 1) {
+  //     goal = 1;
+  //   }
+  // }
 }
