@@ -1,6 +1,7 @@
 #include "vex.h"
 #include <vector>
 #include "tools.h"
+#include "math.h"
 
 using namespace std;
 using namespace vex;
@@ -72,8 +73,7 @@ class Odometry{
   void update(){
     vex::rotation en[3] = {*l, *r, *b};
     double deltaL = en[0].position(rotationUnits::rev) - enPrev[0], deltaR = en[1].position(rotationUnits::rev) - enPrev[1],
-     deltaS = en[2].position(rotationUnits::rev) - enPrev[2];
-     deltaL *= 0.045, deltaR *= 0.045, deltaS *= 0.045;
+    deltaS = en[2].position(rotationUnits::rev) - enPrev[2];
     double deltaO = (deltaL - deltaR) / (sR + sL);
     double cenRadius = deltaR / deltaO + sR;
     double deltaY = 0, deltaX = 0;
@@ -95,8 +95,8 @@ class Odometry{
     // abPos[0] += d1[0];
     // abPos[1] += d1[1];
 
-    abPos[0] += -deltaY * sin(curO) + deltaX * cos(curO);
-    abPos[1] += deltaY * cos(curO) + deltaX * sin(curO);
+    abPos[0] += deltaY * sin(curO) + deltaX * cos(curO);
+    abPos[1] += deltaY * cos(curO) - deltaX * sin(curO);
 
     globalO += curO;
 
@@ -105,10 +105,12 @@ class Odometry{
     }
   }
 
+
   void graphics() {
-    int left_b = 10, right_b = 15, top_b = 6, bottom_b = 11;
-      for (int i=top_b; i<bottom_b; i++) {
-        for (int j=left_b; j<right_b; j++) {
+    Brain.Screen.clearScreen();
+    int left_b = 1, right_b = 10, top_b = 1, bottom_b = 10;
+      for (int i=top_b; i<bottom_b + 1; i++) {
+        for (int j=left_b; j<right_b + 1; j++) {
           if ((i==bottom_b || i==top_b) && (j!=left_b && j!=right_b)) {
             Brain.Screen.setCursor(i,j);
             Brain.Screen.print("_");
@@ -119,7 +121,8 @@ class Odometry{
           }
         }
     }
-    Brain.Screen.setCursor(5 + ((int)abPos[0]) % 10,6 + ((int)abPos[1]) % 10);
+    Brain.Screen.setCursor(((int)abPos[0]) % 10,((int)abPos[1]) % 10);
     Brain.Screen.print("*");
+
   }
 };

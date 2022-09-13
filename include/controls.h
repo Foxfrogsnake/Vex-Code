@@ -23,8 +23,8 @@ class Control{
 
   void control(){
     vex::controller &conT = *con;
-    double R = conT.Axis3.position() - conT.Axis1.position()/1.5;
-    double L = conT.Axis3.position() + conT.Axis1.position()/1.5;
+    double R = conT.Axis2.position() - conT.Axis1.position()/1.5;
+    double L = conT.Axis2.position() + conT.Axis1.position()/1.5;
     R/=2;
     L/=2;
     vex::motor &FRCur = *FR, &FLCur = *FL;

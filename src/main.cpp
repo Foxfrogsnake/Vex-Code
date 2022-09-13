@@ -27,10 +27,9 @@
 #include "vex.h"
 #include "controls.h"
 #include "odometry.h"
-#include "tools.h"
+
 // #include "pid.h"
 using namespace vex;
-
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
@@ -38,6 +37,8 @@ int main() {
   double sR = 0.2, sL = 0.2, sB = 0.175; // in metres
   Control con({&FR, &FL, &BR, &BL}, {&R, &L, &B}, &Controller1);
   Odometry odo({&R, &L, &B}, &Controller1, {sR, sL, sB});
+
+  
   // PIDcontroller wheelPID;
   // initializePID(wheelPID, FR, FL, 0, 0, 0, 0);
   while(true){
@@ -50,6 +51,8 @@ int main() {
     // PID(wheelPID, 0);
   }
 }
+
+
 
 // /*----------------------------------------------------------------------------*/
 // /*                                                                            */
